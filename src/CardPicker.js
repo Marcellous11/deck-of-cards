@@ -40,13 +40,20 @@ const CardPicker = () => {
 	const stack = cards.map(({ image, cardCount }) => {
 		return <Card image={image} cardCount={cardCount} />;
 	});
+	console.log(cardCount);
 
 	return (
 		<div className="CardPicker">
 			<h1>CardPicker</h1>
 			<h3> Number of Cards left:{cardCount} </h3>
 			<button onClick={drawcard}>Draw Card</button>
-			{cardCount > 0 ? <div className="CardPicker-Stack">{stack}</div> : <h2> You are out of cards</h2>}
+			{cardCount === undefined ? (
+				<h2>Draw Card</h2>
+			) : cardCount > 0 ? (
+				<div className="CardPicker-Stack">{stack}</div>
+			) : (
+				<h2> You are out of cards</h2>
+			)}
 		</div>
 	);
 };
