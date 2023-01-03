@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import axios from 'axios';
 import './CardPicker.css';
+import { v4 as uuid } from 'uuid';
 
 const CardPicker = () => {
 	const [ deck_id, setDeck ] = useState(undefined);
@@ -20,6 +21,7 @@ const CardPicker = () => {
 		async function card() {
 			const res = await axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=1`);
 			const cardData = {
+				id: uuid(),
 				image: res.data.cards[0].image,
 				suit: res.data.cards[0].suit,
 				value: res.data.cards[0].value,
@@ -31,8 +33,8 @@ const CardPicker = () => {
 		card();
 	};
 
-	const stack = cards.map(({ image }) => {
-		return <Card image={image} />;
+	const stack = cards.map(({ image, id }) => {
+		return <Card image={image} key={id} />;
 	});
 
 	return (
