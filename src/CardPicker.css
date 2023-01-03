@@ -1,0 +1,8 @@
+.CardPicker-Stack {
+	display: flex;
+	justify-content: center;
+}
+button {
+	position: relative;
+	margin: 3em;
+}

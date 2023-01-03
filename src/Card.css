@@ -1,0 +1,20 @@
+.Card {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+	/* height: 50vh; */
+	position: absolute;
+	/* margin-left: 41vw; */
+}
+.Card-image {
+	display: flex;
+	justify-content: center;
+	height: 300px;
+	/* position: absolute; */
+}
+
+image {
+	object-fit: cover;
+	width: 300px;
+}
