@@ -15,7 +15,7 @@ const CardPicker = () => {
 
 	useEffect(() => {
 		async function deck() {
-			const res = await axios.get('https://deckofcardsapi.com/api/deck/new/');
+			const res = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle');
 			setDeck(res.data.deck_id);
 		}
 		deck();
@@ -46,7 +46,7 @@ const CardPicker = () => {
 			<h1>CardPicker</h1>
 			<h3> Number of Cards left:{cardCount} </h3>
 			<button onClick={drawcard}>Draw Card</button>
-			<div className="CardPicker-Stack">{stack}</div>
+			{cardCount > 0 ? <div className="CardPicker-Stack">{stack}</div> : <h2> You are out of cards</h2>}
 		</div>
 	);
 };
