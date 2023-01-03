@@ -4,14 +4,9 @@ import axios from 'axios';
 import './CardPicker.css';
 
 const CardPicker = () => {
-	const INITAL_STATE = [
-		{
-			deck_id: ''
-		}
-	];
 	const [ deck_id, setDeck ] = useState(undefined);
 	const [ cards, setCards ] = useState([]);
-	const [ cardCount, setCardCount ] = useState();
+	const [ cardCount, setCardCount ] = useState(52);
 
 	useEffect(() => {
 		async function deck() {
@@ -24,7 +19,6 @@ const CardPicker = () => {
 	const drawcard = (e) => {
 		async function card() {
 			const res = await axios.get(`https://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=1`);
-			console.log(res);
 			const cardData = {
 				image: res.data.cards[0].image,
 				suit: res.data.cards[0].suit,
@@ -37,23 +31,16 @@ const CardPicker = () => {
 		card();
 	};
 
-	const stack = cards.map(({ image, cardCount }) => {
-		return <Card image={image} cardCount={cardCount} />;
+	const stack = cards.map(({ image }) => {
+		return <Card image={image} />;
 	});
-	console.log(cardCount);
 
 	return (
 		<div className="CardPicker">
 			<h1>CardPicker</h1>
 			<h3> Number of Cards left:{cardCount} </h3>
 			<button onClick={drawcard}>Draw Card</button>
-			{cardCount === undefined ? (
-				<h2>Draw Card</h2>
-			) : cardCount > 0 ? (
-				<div className="CardPicker-Stack">{stack}</div>
-			) : (
-				<h2> You are out of cards</h2>
-			)}
+			{cardCount > 0 ? <div className="CardPicker-Stack">{stack}</div> : <h2> You are out of cards</h2>}
 		</div>
 	);
 };
